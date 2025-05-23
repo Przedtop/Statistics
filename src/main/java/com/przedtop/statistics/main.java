@@ -1,4 +1,4 @@
-package com.przedtop.przedtopStatistics;
+package com.przedtop.statistics;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -6,8 +6,7 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        getServer().getPluginManager().registerEvents(new BreakBlock(),this);
     }
 
     @Override
