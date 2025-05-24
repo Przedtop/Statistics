@@ -5,15 +5,16 @@ import com.przedtop.statistics.dbOperations.GetDBStats;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
-public class BreakBlock implements Listener {
+public class Deaths implements Listener {
+
     @EventHandler
-    void onBreakBlock(BlockBreakEvent e) {
+    void onDeath(PlayerDeathEvent e) {
         Player player = e.getPlayer();
         EditDBStats editDBStats = new EditDBStats();
-        editDBStats.incrementBlocksBroken(player);
+        editDBStats.incrementDeaths(player);
         GetDBStats getDBStats = new GetDBStats();
-        e.getPlayer().sendMessage("You have broken " + getDBStats.getBlocksBroken(player) + " blocks.");
+        player.sendMessage("You have died " + getDBStats.getDeaths(player) + " times.");
     }
 }

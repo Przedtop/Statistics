@@ -30,17 +30,6 @@ public class EditDBStats {
         }
     }
 
-    public void incrementTimeSpent(Player player, int time) {
-        try (Connection connection = DriverManager.getConnection(DBSettings.URL, DBSettings.USER, DBSettings.PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("UPDATE playersData SET timeSpent = timeSpent + ? WHERE uuid = ?")) {
-            statement.setInt(1, time);
-            statement.setString(2, player.getUniqueId().toString());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage("Error while updating time spent: " + e.getMessage());
-        }
-    }
-
     public void incrementKills(Player player) {
         try (Connection connection = DriverManager.getConnection(DBSettings.URL, DBSettings.USER, DBSettings.PASSWORD);
              PreparedStatement statement = connection.prepareStatement("UPDATE playersData SET kills = kills + 1 WHERE uuid = ?")) {
@@ -58,6 +47,17 @@ public class EditDBStats {
             statement.executeUpdate();
         } catch (SQLException e) {
             Bukkit.getConsoleSender().sendMessage("Error while updating deaths: " + e.getMessage());
+        }
+    }
+
+    public void incresePlayTime(Player player, int time) {
+        try (Connection connection = DriverManager.getConnection(DBSettings.URL, DBSettings.USER, DBSettings.PASSWORD);
+             PreparedStatement statement = connection.prepareStatement("UPDATE playersData SET timeSpent = timeSpent + ? WHERE uuid = ?")) {
+            statement.setInt(1, time);
+            statement.setString(2, player.getUniqueId().toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            Bukkit.getConsoleSender().sendMessage("Error while updating time spent: " + e.getMessage());
         }
     }
 }
